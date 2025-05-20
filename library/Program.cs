@@ -1,3 +1,5 @@
+using System.Collections;
+
 namespace library
 {
     internal static class Program
@@ -11,7 +13,11 @@ namespace library
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            Form1 form = new Form1();
+
+            form.WindowState = FormWindowState.Maximized;
+          
+            Application.Run(form);
         }
     }
 }
