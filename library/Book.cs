@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace library
 {
-    class Book
+    public class Book
     {
 
         public String title;
