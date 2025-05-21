@@ -39,6 +39,7 @@
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
+            button1 = new Button();
             bookContainer = new FlowLayoutPanel();
             flowLayoutPanel1.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -49,6 +50,7 @@
             // 
             flowLayoutPanel1.BackColor = Color.FromArgb(40, 117, 250);
             flowLayoutPanel1.Controls.Add(groupBox1);
+            flowLayoutPanel1.Controls.Add(button1);
             flowLayoutPanel1.Dock = DockStyle.Left;
             flowLayoutPanel1.Location = new Point(0, 0);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -171,6 +173,19 @@
             label1.TabIndex = 0;
             label1.Text = "Title";
             // 
+            // button1
+            // 
+            button1.Cursor = Cursors.Hand;
+            button1.ForeColor = Color.FromArgb(40, 117, 250);
+            button1.Location = new Point(130, 386);
+            button1.Margin = new Padding(120, 50, 3, 3);
+            button1.Name = "button1";
+            button1.Size = new Size(198, 44);
+            button1.TabIndex = 0;
+            button1.Text = "Show DataGridView";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += showDataGridView;
+            // 
             // bookContainer
             // 
             bookContainer.AutoScroll = true;
@@ -181,7 +196,6 @@
             bookContainer.Padding = new Padding(20);
             bookContainer.Size = new Size(852, 596);
             bookContainer.TabIndex = 1;
-            // 
             // 
             // Form1
             // 
@@ -213,5 +227,6 @@
         private TextBox bookTitleField;
         private CheckBox bookReadingStatus;
         private Button addBookButton;
+        private Button button1;
     }
 }

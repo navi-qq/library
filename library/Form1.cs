@@ -19,7 +19,7 @@ namespace library
                 MessageBox.Show("Fields must not be empty!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-                
+
 
             library.Add(new Book(bookTitleField.Text, bookAuthorField.Text, (int)bookPagesField.Value, bookReadingStatus.Checked));
             render();
@@ -77,7 +77,7 @@ namespace library
                 literalTitle.AutoSize = isAutoSize;
                 literalTitle.ForeColor = textColor;
                 literalTitle.Text = book.title;
-            
+
 
 
 
@@ -92,7 +92,7 @@ namespace library
                 literalAuthor.AutoSize = isAutoSize;
                 literalAuthor.ForeColor = textColor;
                 literalAuthor.Text = book.author;
-         
+
 
 
 
@@ -103,7 +103,7 @@ namespace library
                 bookPageNumber.Font = labelStyle;
                 bookPageNumber.ForeColor = textColor;
                 bookPageNumber.Text = "Number of Page/s";
-          
+
                 literalPageNumber.AutoSize = isAutoSize;
                 literalPageNumber.ForeColor = textColor;
                 literalPageNumber.Text = book.numberOfPages.ToString();
@@ -125,7 +125,8 @@ namespace library
                 if (book.readingStatus)
                 {
                     literalStatus.Text = "Completed";
-                } else literalStatus.Text = "On Read";
+                }
+                else literalStatus.Text = "On Read";
 
 
 
@@ -238,10 +239,10 @@ namespace library
             Control book = (sender as Button).Parent;
             int index = bookContainer.Controls.IndexOf(book);
 
-           DialogResult confirmation = MessageBox.Show(
-               "Are you sure you want to delete these book?", "Remove Book", 
-               MessageBoxButtons.YesNo, 
-               MessageBoxIcon.Question);
+            DialogResult confirmation = MessageBox.Show(
+                "Are you sure you want to delete these book?", "Remove Book",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
 
 
             if (confirmation == DialogResult.Yes)
@@ -250,6 +251,14 @@ namespace library
                 render();
             }
 
+        }
+
+        private void showDataGridView(object sender, EventArgs e)
+        {
+            BookDataGridView bookDataGridView = new BookDataGridView();
+
+            bookDataGridView.setData(library);
+            bookDataGridView.ShowDialog();
         }
     }
 }
