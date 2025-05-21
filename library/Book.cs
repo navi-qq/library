@@ -29,9 +29,12 @@ namespace library
             this.readingStatus = newReadigStatus;
         }
 
-        public void edit()
+        public void edit(string editedTitle, string editedAuthor, int editedNumberOfPages, bool editedReadingStatus)
         {
-
+            this.title = editedTitle;
+            this.author = editedAuthor;
+            this.numberOfPages = editedNumberOfPages;
+            this.readingStatus = editedReadingStatus;
         }
     }
 }
