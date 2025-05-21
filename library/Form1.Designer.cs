@@ -28,14 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             flowLayoutPanel1 = new FlowLayoutPanel();
             groupBox1 = new GroupBox();
             addBookButton = new Button();
             bookPagesField = new NumericUpDown();
             bookAuthorField = new TextBox();
             bookTitleField = new TextBox();
-            readingStatus = new CheckBox();
+            bookReadingStatus = new CheckBox();
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
@@ -55,9 +54,8 @@
             label13 = new Label();
             label14 = new Label();
             editButton = new Button();
+            removeBookButton = new Button();
             label5 = new Label();
-            contextMenuStrip1 = new ContextMenuStrip(components);
-            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             flowLayoutPanel1.SuspendLayout();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)bookPagesField).BeginInit();
@@ -86,7 +84,7 @@
             groupBox1.Controls.Add(bookPagesField);
             groupBox1.Controls.Add(bookAuthorField);
             groupBox1.Controls.Add(bookTitleField);
-            groupBox1.Controls.Add(readingStatus);
+            groupBox1.Controls.Add(bookReadingStatus);
             groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(label2);
@@ -143,17 +141,17 @@
             bookTitleField.Size = new Size(125, 21);
             bookTitleField.TabIndex = 5;
             // 
-            // readingStatus
+            // bookReadingStatus
             // 
-            readingStatus.AutoSize = true;
-            readingStatus.Cursor = Cursors.Hand;
-            readingStatus.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            readingStatus.Location = new Point(34, 259);
-            readingStatus.Name = "readingStatus";
-            readingStatus.Size = new Size(94, 21);
-            readingStatus.TabIndex = 4;
-            readingStatus.Text = "Completed";
-            readingStatus.UseVisualStyleBackColor = true;
+            bookReadingStatus.AutoSize = true;
+            bookReadingStatus.Cursor = Cursors.Hand;
+            bookReadingStatus.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            bookReadingStatus.Location = new Point(34, 259);
+            bookReadingStatus.Name = "bookReadingStatus";
+            bookReadingStatus.Size = new Size(94, 21);
+            bookReadingStatus.TabIndex = 4;
+            bookReadingStatus.Text = "Completed";
+            bookReadingStatus.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
@@ -215,11 +213,12 @@
             bookExample.Controls.Add(flowLayoutPanel7);
             bookExample.Controls.Add(flowLayoutPanel8);
             bookExample.Controls.Add(editButton);
+            bookExample.Controls.Add(removeBookButton);
             bookExample.FlowDirection = FlowDirection.TopDown;
             bookExample.Location = new Point(23, 23);
             bookExample.Name = "bookExample";
             bookExample.Padding = new Padding(20);
-            bookExample.Size = new Size(327, 256);
+            bookExample.Size = new Size(327, 284);
             bookExample.TabIndex = 2;
             // 
             // flowLayoutPanel5
@@ -363,6 +362,19 @@
             editButton.TabIndex = 10;
             editButton.Text = "Edit Book";
             editButton.UseVisualStyleBackColor = false;
+            editButton.Click += handleEditBook;
+            // 
+            // removeBookButton
+            // 
+            removeBookButton.BackColor = Color.FromArgb(40, 117, 250);
+            removeBookButton.Dock = DockStyle.Right;
+            removeBookButton.ForeColor = SystemColors.Control;
+            removeBookButton.Location = new Point(183, 232);
+            removeBookButton.Name = "removeBookButton";
+            removeBookButton.Size = new Size(122, 29);
+            removeBookButton.TabIndex = 11;
+            removeBookButton.Text = "Remove Book";
+            removeBookButton.UseVisualStyleBackColor = false;
             // 
             // label5
             // 
@@ -372,12 +384,6 @@
             label5.Size = new Size(0, 20);
             label5.TabIndex = 4;
             // 
-            // contextMenuStrip1
-            // 
-            contextMenuStrip1.ImageScalingSize = new Size(20, 20);
-            contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(61, 4);
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -386,7 +392,7 @@
             Controls.Add(bookContainer);
             Controls.Add(flowLayoutPanel1);
             Name = "Form1";
-            Text = "Form1";
+            Text = "Home";
             flowLayoutPanel1.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
@@ -416,7 +422,7 @@
         private NumericUpDown bookPagesField;
         private TextBox bookAuthorField;
         private TextBox bookTitleField;
-        private CheckBox readingStatus;
+        private CheckBox bookReadingStatus;
         private Button addBookButton;
         private FlowLayoutPanel bookExample;
         private Label label5;
@@ -431,9 +437,8 @@
         private Label label12;
         private FlowLayoutPanel flowLayoutPanel8;
         private Label label13;
-        private ContextMenuStrip contextMenuStrip1;
         private Label label14;
         private Button editButton;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private Button removeBookButton;
     }
 }
