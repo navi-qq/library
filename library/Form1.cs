@@ -13,7 +13,26 @@ namespace library
 
         private void addNewBook(object sender, EventArgs e)
         {
+            if (bookTitleField.Text.Length == 0 || bookAuthorField.Text.Length == 0
+                || bookPagesField.Value == 0)
+            {
+                MessageBox.Show("Fields must not be empty!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+                
+
+            library.Add(new Book(bookTitleField.Text, bookAuthorField.Text, (int)bookPagesField.Value, bookReadingStatus.Checked));
             render();
+
+            resetBookFormField();
+        }
+
+        private void resetBookFormField()
+        {
+            bookTitleField.ResetText();
+            bookAuthorField.ResetText();
+            bookPagesField.Value = 0;
+            bookReadingStatus.Checked = false;
         }
 
         private void render()
@@ -113,7 +132,7 @@ namespace library
 
                 mainBook.BackColor = Color.FromArgb(40, 117, 250);
 
-                mainBook.Size = new Size(327, 256);
+                mainBook.Size = new Size(327, 284);
                 titleLabelContainer.Size = new Size(width, height);
                 authorLabelContainer.Size = new Size(width, height);
                 pageNumberLabelContainer.Size = new Size(width, height);
@@ -151,7 +170,9 @@ namespace library
 
 
                 Button editButton = new Button();
+                Button removeButton = new Button();
                 editButton.Text = "Edit Book";
+                removeButton.Text = "Remove Book";
 
                 editButton.Cursor = Cursors.Hand;
                 editButton.Dock = DockStyle.Right;
@@ -159,17 +180,76 @@ namespace library
                 editButton.BackColor = Color.Transparent;
                 editButton.Margin = new Padding(0, 25, 3, 3);
                 editButton.Size = new Size(94, 29);
+                editButton.Click += handleEditBook;
 
+                removeButton.Cursor = Cursors.Hand;
+                removeButton.Dock = DockStyle.Right;
+                removeButton.BackColor = Color.FromArgb(40, 117, 250);
+                removeButton.ForeColor = SystemColors.Control;
+                removeButton.Size = new Size(122, 29);
+                removeButton.Click += handleRemoveBook;
+
+                editButton.Tag = 3;
                 mainBook.Controls.Add(titleLabelContainer);
                 mainBook.Controls.Add(authorLabelContainer);
                 mainBook.Controls.Add(pageNumberLabelContainer);
                 mainBook.Controls.Add(statusLabelContainer);
                 mainBook.Controls.Add(editButton);
+                mainBook.Controls.Add(removeButton);
 
                 bookContainer.Controls.Add(mainBook);
             }
 
             bookContainer.Visible = true;
+        }
+
+
+        private void handleEditBook(object sender, EventArgs e)
+        {
+
+            Control book = (sender as Button).Parent;
+            int index = bookContainer.Controls.IndexOf(book);
+
+            EditBookDialog editBookDialog = new EditBookDialog();
+
+            editBookDialog.Controls[6].Text = library[index].title;
+            editBookDialog.Controls[4].Text = library[index].author;
+            (editBookDialog.Controls[0] as CheckBox).Checked = library[index].readingStatus;
+            (editBookDialog.Controls[2] as NumericUpDown).Value = library[index].numberOfPages;
+
+
+            editBookDialog.Controls[9].Click += (sender, e) =>
+            {
+                string editedTitle = editBookDialog.Controls[6].Text;
+                string editedAuthor = editBookDialog.Controls[4].Text;
+                int editedNumberOfPages = (int)(editBookDialog.Controls[2] as NumericUpDown).Value;
+                bool editedReadingStatus = (editBookDialog.Controls[0] as CheckBox).Checked;
+                library[index].edit(editedTitle, editedAuthor, editedNumberOfPages, editedReadingStatus);
+                render();
+                editBookDialog.Close();
+            };
+
+            editBookDialog.ShowDialog();
+        }
+
+        private void handleRemoveBook(object sender, EventArgs e)
+        {
+
+            Control book = (sender as Button).Parent;
+            int index = bookContainer.Controls.IndexOf(book);
+
+           DialogResult confirmation = MessageBox.Show(
+               "Are you sure you want to delete these book?", "Remove Book", 
+               MessageBoxButtons.YesNo, 
+               MessageBoxIcon.Question);
+
+
+            if (confirmation == DialogResult.Yes)
+            {
+                library.RemoveAt(index);
+                render();
+            }
+
         }
     }
 }
