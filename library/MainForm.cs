@@ -77,7 +77,7 @@ namespace library
 
                 literalTitle.AutoSize = isAutoSize;
                 literalTitle.ForeColor = textColor;
-                literalTitle.Text = book.title;
+                literalTitle.Text = book.GetTitle();
 
 
 
@@ -92,7 +92,7 @@ namespace library
 
                 literalAuthor.AutoSize = isAutoSize;
                 literalAuthor.ForeColor = textColor;
-                literalAuthor.Text = book.author;
+                literalAuthor.Text = book.GetAuthor();
 
 
 
@@ -107,7 +107,7 @@ namespace library
 
                 literalPageNumber.AutoSize = isAutoSize;
                 literalPageNumber.ForeColor = textColor;
-                literalPageNumber.Text = book.numberOfPages.ToString();
+                literalPageNumber.Text = book.GetNumberOfPages().ToString();
 
 
 
@@ -123,7 +123,7 @@ namespace library
                 literalStatus.AutoSize = isAutoSize;
                 literalStatus.ForeColor = textColor;
 
-                if (book.readingStatus)
+                if (book.GetReadingStatus())
                 {
                     literalStatus.Text = "Completed";
                 }
@@ -214,10 +214,10 @@ namespace library
 
             EditBookDialog editBookDialog = new EditBookDialog();
 
-            editBookDialog.Controls[6].Text = library[index].title;
-            editBookDialog.Controls[4].Text = library[index].author;
-            (editBookDialog.Controls[0] as CheckBox).Checked = library[index].readingStatus;
-            (editBookDialog.Controls[2] as NumericUpDown).Value = library[index].numberOfPages;
+            editBookDialog.Controls[6].Text = library[index].GetTitle();
+            editBookDialog.Controls[4].Text = library[index].GetAuthor();
+            (editBookDialog.Controls[0] as CheckBox).Checked = library[index].GetReadingStatus();
+            (editBookDialog.Controls[2] as NumericUpDown).Value = library[index].GetNumberOfPages();
 
 
             editBookDialog.Controls[9].Click += (sender, e) =>
@@ -258,7 +258,14 @@ namespace library
         {
             BookDataGridView bookDataGridView = new BookDataGridView();
 
-            bookDataGridView.setData(library);
+
+            foreach (var book in library)
+            {
+                bookDataGridView.setData(book.getBook());
+            }
+
+        
+
             bookDataGridView.ShowDialog();
         }
 
@@ -272,7 +279,7 @@ namespace library
 
          
 
-          
+
 
             foreach (var book in library)
             {
@@ -280,10 +287,10 @@ namespace library
 
                 command = new SqlCommand(query, connection);
 
-                command.Parameters.AddWithValue("@book_title", book.title);
-                command.Parameters.AddWithValue("@book_author", book.author);
-                command.Parameters.AddWithValue("@book_pages", book.numberOfPages);
-                command.Parameters.AddWithValue("@book_status", book.readingStatus);
+                command.Parameters.AddWithValue("@book_title", book.GetTitle());
+                command.Parameters.AddWithValue("@book_author", book.GetAuthor());
+                command.Parameters.AddWithValue("@book_pages", book.GetNumberOfPages());
+                command.Parameters.AddWithValue("@book_status", book.GetReadingStatus());
                 command.ExecuteNonQuery();
             }
 

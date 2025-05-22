@@ -23,9 +23,9 @@ namespace library
             //this.Clos
         }
 
-        public void setData(List<Book> library)
+        public void setData(Book book)
         {
-            this.library = library;
+            library.Add(book);
         }
 
         private void BookDataGridView_Load(object sender, EventArgs e)
@@ -38,11 +38,11 @@ namespace library
             foreach (var book in library)
             {
 
-                tempData[0] = book.title;
-                tempData[1] = book.author;
-                tempData[2] = book.numberOfPages.ToString();
+                tempData[0] = book.GetTitle();
+                tempData[1] = book.GetAuthor();
+                tempData[2] = book.GetNumberOfPages().ToString();
 
-                if (book.readingStatus)
+                if (book.GetReadingStatus())
                 {
                     tempData[3] = "Completed";
                 }

@@ -10,10 +10,10 @@ namespace library
     public class Book
     {
 
-        public String title;
-        public String author;
-        public int numberOfPages;
-        public bool readingStatus;
+        private String title;
+        private String author;
+        private int numberOfPages;
+        private bool readingStatus;
 
 
         public Book(string title, string author, int numberOfPages, bool readingStatus)
@@ -29,6 +29,32 @@ namespace library
             this.readingStatus = newReadigStatus;
         }
 
+        public string GetTitle()
+        {
+            return title;
+        }
+
+   
+        public string GetAuthor()
+        {
+            return author;
+        }
+
+        public int GetNumberOfPages()
+        {
+            return numberOfPages;
+        }
+
+
+        public bool GetReadingStatus()
+        {
+            return readingStatus;
+        }
+
+        public Book getBook()
+        {
+            return new Book(this.title, this.author, this.numberOfPages, this.readingStatus);
+        }
         public void edit(string editedTitle, string editedAuthor, int editedNumberOfPages, bool editedReadingStatus)
         {
             this.title = editedTitle;
