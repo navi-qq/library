@@ -1,3 +1,4 @@
+using Microsoft.Data.SqlClient;
 using System.Collections;
 
 namespace library
@@ -259,6 +260,35 @@ namespace library
 
             bookDataGridView.setData(library);
             bookDataGridView.ShowDialog();
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+            SqlConnection connection = new SqlConnection("Data Source=LAPTOP-QG0KG0AK;Initial Catalog=accountLogin;Integrated Security=True;TrustServerCertificate=True");
+
+            connection.Open();
+            SqlCommand command;
+
+         
+
+          
+
+            foreach (var book in library)
+            {
+                string query = "INSERT INTO user_books VALUES (@book_title, @book_author, @book_pages, @book_status)";
+
+                command = new SqlCommand(query, connection);
+
+                command.Parameters.AddWithValue("@book_title", book.title);
+                command.Parameters.AddWithValue("@book_author", book.author);
+                command.Parameters.AddWithValue("@book_pages", book.numberOfPages);
+                command.Parameters.AddWithValue("@book_status", book.readingStatus);
+                command.ExecuteNonQuery();
+            }
+
+
+            connection.Close();
         }
     }
 }

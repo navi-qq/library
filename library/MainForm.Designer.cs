@@ -197,16 +197,17 @@
             bookContainer.Size = new Size(852, 596);
             bookContainer.TabIndex = 1;
             // 
-            // Form1
+            // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1319, 596);
             Controls.Add(bookContainer);
             Controls.Add(flowLayoutPanel1);
-            Name = "Form1";
+            Name = "MainForm";
             Text = "Home";
             WindowState = FormWindowState.Maximized;
+            FormClosed += MainForm_FormClosed;
             flowLayoutPanel1.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
