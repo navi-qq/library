@@ -206,6 +206,7 @@
             Controls.Add(flowLayoutPanel1);
             Name = "Form1";
             Text = "Home";
+            WindowState = FormWindowState.Maximized;
             flowLayoutPanel1.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
