@@ -67,7 +67,7 @@ namespace library
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Information);
 
-            Form1 mainForm = new Form1();
+            MainForm mainForm = new MainForm();
             mainForm.Show();
             mainForm.Shown += (sender, e) =>
             {

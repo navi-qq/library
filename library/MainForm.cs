@@ -2,11 +2,11 @@ using System.Collections;
 
 namespace library
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
 
         List<Book> library = new List<Book>();
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
         }
